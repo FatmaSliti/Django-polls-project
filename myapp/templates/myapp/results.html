@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Results</title>
+    <link rel="stylesheet" href="{% static 'polls/results.css' %}">
+</head>
+<body>
+
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>
+            <!-- {{ choice.choice_text }} — <strong>{{ choice.votes }}</strong> vote{{ choice.votes|pluralize }} -->
+            <span class="choice-text">{{ choice.choice_text }}</span>
+            <span class="vote-count">{{ choice.votes }} vote{{ choice.votes|pluralize }}</span>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+</body>
+</html>
